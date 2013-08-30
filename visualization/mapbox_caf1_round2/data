@@ -1,0 +1,206 @@
+/* This is where the data is called and styled. */
+/* Uncomment for use.                           */
+
+
+#round2_cty_pt {
+  [zoom>4][zoom<9]{
+  marker-fill:#808080;
+  marker-opacity:.5;
+  marker-allow-overlap:true;  
+  }
+  [zoom=5]{
+  [tot_locations > 900]{
+    marker-width:8;
+   }
+  [tot_locations > 450][tot_locations<=900]{
+    marker-width:6;
+   }
+  [tot_locations > 200][tot_locations<=450]{
+    marker-width:4;
+   }
+  [tot_locations > 55][tot_locations<=200]{
+    marker-width:2;
+   }
+  [tot_locations<=55]{
+    marker-width:1;
+   }    
+  }
+
+  [zoom=6]{
+  [tot_locations > 900]{
+    marker-width:12;
+   }
+  [tot_locations > 450][tot_locations<=900]{
+    marker-width:10;
+   }
+  [tot_locations > 200][tot_locations<=450]{
+    marker-width:8;
+   }
+  [tot_locations > 55][tot_locations<=200]{
+    marker-width:6;
+   }
+  [tot_locations<=55]{
+    marker-width:5;
+   }   
+  }
+
+  [zoom=7]{
+  [tot_locations > 900]{
+    marker-width:18;
+   }
+  [tot_locations > 450][tot_locations<=900]{
+    marker-width:16;
+   }
+  [tot_locations > 200][tot_locations<=450]{
+    marker-width:14;
+   }
+  [tot_locations > 55][tot_locations<=200]{
+    marker-width:12;
+   }
+  [tot_locations<=55]{
+    marker-width:8;
+   }   
+  }
+  
+  [zoom=8]{
+  [tot_locations > 900]{
+    marker-width:36;
+    marker-opacity:.2;  
+   }
+  [tot_locations > 450][tot_locations<=900]{
+    marker-width:34;
+    marker-opacity:.2;  
+    }
+  [tot_locations > 200][tot_locations<=450]{
+    marker-width:32;
+    marker-opacity:.2;  
+    }
+  [tot_locations > 55][tot_locations<=200]{
+    marker-width:30;
+    marker-opacity:.2;        
+   }
+  [tot_locations<=55]{
+    marker-width:22;
+    marker-opacity:.2;        
+   }   
+  }   
+}
+
+
+#round2_cty_poly {
+  line-color:@darkchrome;
+  line-width:0.5;
+  polygon-opacity:1;
+  polygon-fill:@lightchrome;
+}
+
+/*the county layer draw all county boudaries and labels the county names*/
+#county_lines {
+ [zoom>3][zoom<7]{
+  line-color:@darkchrome;
+  line-opacity:0.15;
+  line-width:0.35;
+    }
+}
+
+#county_lines {
+ [zoom>6][zoom<9]{
+  line-color:@darkchrome;
+  line-opacity:0.15;
+  line-width:1.75;
+    }
+  [zoom>8]{
+  line-color:@darkchrome;
+  line-opacity:0.15;
+  line-width:2.75;
+  }
+  [zoom>7]{
+  text-name:"[cty_name]";
+  text-face-name:@sans-bold;
+  text-size:9;
+  text-fill:fadeout(@state-name, 55%);
+  text-halo-radius:3;
+  }
+}
+
+/*the nearshore layer is water and on top to cover 'land' and get a 
+  nice coast line*/
+/*ES: added polygon-gamma do to block boundaries in nearshore lakes showing up*/
+
+#nearshore [zoom>6]{
+  polygon-gamma: 0.5;
+  polygon-fill:@water;
+  
+  /*[water=1]{
+  line-color:@water;  
+  line-width:0.5;
+  }  */
+} 
+
+/*the state high res layer comes on above zoom scale 7 so the block, county
+  and state layers are all coincident*/
+#state_high_res {
+  [zoom>7]{
+    line-color: fadeout(#222c31, 45%); 
+    line-width:2.0;
+    }
+ }
+ 
+
+#round2_blocks {
+  [zoom>8]{
+  polygon-opacity:1;
+  polygon-fill:#35332b;
+  }
+}
+
+#ne_freeway {
+  [zoom=4]{
+    line-color:#9b9797;
+    line-width:.4; }
+  [zoom=5]{
+    line-color:#9b9797;
+    line-width:.5; }
+  [zoom=5]{
+    line-color:#9b9797;
+    line-width:.6; }
+  [zoom=6]{
+    line-color:#9b9797;
+    line-width:.7; }  
+  [zoom=7]{
+    line-color:#9b9797;
+    line-width:.8; }
+  [zoom=8]{
+    line-color:#9b9797;
+    line-width:.9; }  
+  [zoom=9]{
+    line-color:#9b9797;
+    line-width:1.0; }
+  [zoom=10]{
+    line-color:#9b9797;
+    line-width:1.1; }
+}
+
+#ne_primary {
+  [zoom=6]{
+    line-color:#9b9797;
+    line-width:.1; }  
+  [zoom=7]{
+    line-color:#9b9797;
+    line-width:.2; }
+  [zoom=8]{
+    line-color:#9b9797;
+    line-width:.3; }  
+  [zoom=9]{
+    line-color:#9b9797;
+    line-width:.4; }
+  [zoom=10]{
+    line-color:#9b9797;
+    line-width:.5; }
+}
+
+#other {
+  [zoom=10]{
+    line-color:#9b9797;
+    line-width:.2; }
+}
