@@ -1,0 +1,422 @@
+{
+  "bounds": [
+    -180,
+    13,
+    180,
+    72
+  ],
+  "center": [
+    -98,
+    38,
+    4
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "round2_blocks",
+    "template_teaser": "<table class=\"temp-tbl-data\">\n  <tr><th colspan=\"3\" class=\"center\"><strong>{{{carrier}}}</strong></th><td></tr>\n  <tr><th colspan=\"3\" class=\"center\">Census Block: {{{block_fips}}}</th><td></tr>\n\n  <tr><td colspan=\"2\" class=\"left\">Total Locations:</td>\n      <td class=right>{{{tot_locations}}}</td></tr>\n\n  <tr><td colspan=\"2\" class=\"left\">Number of $775 Locations:</td>\n      <td class=right>{{{num_hi_loc}}}</td></tr>\n\n  <tr><td colspan=\"2\" class=\"left\">Number of $550 Locations:</td>\n      <td class=right>{{{num_low_loc}}}</td></tr>\n  <tr><td colspan=\"2\" class=\"left\">Total Support:</td>\n      <td class=right>${{{tot_support}}}</td></tr>\n</table>\n\n\n<style type=\"text/css\">\n.ts-map .wax-tooltip {\n  max-width:400px !important;\n  max-height:300px !important;\n  overflow:visible !important;\n  width:auto\\9 !important;\n}\n.temp-tbl-data td.right {\ntext-align: right;}\n.temp-tbl-data th.center{\ntext-align: center;}\n.temp-tbl-data td.left{\ntext-align td.left;}\n.temp-tbl-data td, .temp-tbl-data th{\nborder: none;}\n</style>",
+    "template_full": "",
+    "template_location": "",
+    "fields": [
+      "carrier",
+      "block_fips",
+      "tot_locations",
+      "num_hi_loc",
+      "num_low_loc",
+      "tot_support",
+      "gid"
+    ]
+  },
+  "minzoom": 2,
+  "maxzoom": 10,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss",
+    "data-colors",
+    "labels",
+    "data"
+  ],
+  "Layer": [
+    {
+      "geometry": "polygon",
+      "id": "land",
+      "name": "land",
+      "srs": "",
+      "class": "",
+      "Datasource": {
+        "file": "http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/physical/10m-land.zip",
+        "id": "land",
+        "srs": "",
+        "project": "RoadMiles"
+      }
+    },
+    {
+      "id": "countries",
+      "name": "countries",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "geometry": "polygon",
+      "Datasource": {
+        "file": "http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/cultural/10m-admin-0-countries.zip"
+      },
+      "class": ""
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -179.14723599999994,
+        -14.548698999999917,
+        179.77846999999988,
+        71.39038000000002
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select * from carto.state\nwhere state in ('60','66','69','72','78') ) as islands",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-19942579.0885424,-1637243.58853687,20012847.7359938,11537091.7298767",
+        "host": "localhost",
+        "port": "54321",
+        "dbname": "feomike"
+      },
+      "id": "islands",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "islands"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -179.14723599999994,
+        -14.548698999999917,
+        179.77846999999988,
+        71.39038000000002
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select * from carto.state) as state_high_res",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-19942579.0885424,-1637243.58853687,20012847.7359938,11537091.7298767",
+        "host": "localhost",
+        "port": "54321",
+        "dbname": "feomike"
+      },
+      "id": "state_high_res",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "state_high_res"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -161.045334,
+        17.885115,
+        -65.267296,
+        68.459625
+      ],
+      "id": "round2_cty_poly",
+      "class": "",
+      "Datasource": {
+        "file": "https://raw.github.com/feomike/caf1_round2/master/data/caf_round2_cty_poly.geojson"
+      },
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "round2_cty_poly"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -179.23108599999978,
+        -14.60181299999999,
+        179.85968099999982,
+        71.44105899999991
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select * from carto.water_poly) as nearshore",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-19951913.2278454,-1643352.8198603,20021888.1031606,11554793.5711918",
+        "host": "localhost",
+        "port": "54321",
+        "dbname": "feomike",
+        "id": "nearshore",
+        "project": "706_mobile",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+      },
+      "id": "nearshore",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "nearshore"
+    },
+    {
+      "geometry": "polygon",
+      "id": "lake",
+      "name": "lake",
+      "srs": "",
+      "class": "",
+      "Datasource": {
+        "file": "http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/physical/10m-lakes.zip",
+        "id": "lake",
+        "srs": "",
+        "project": "706_mobile"
+      }
+    },
+    {
+      "geometry": "polygon",
+      "id": "state-name",
+      "name": "state-name",
+      "srs": "",
+      "class": "",
+      "Datasource": {
+        "file": "http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/cultural/10m-admin-1-states-provinces-shp.zip",
+        "id": "state-name",
+        "srs": "",
+        "project": "RoadMiles"
+      }
+    },
+    {
+      "geometry": "linestring",
+      "id": "state-line",
+      "name": "state-line",
+      "srs": "",
+      "class": "",
+      "Datasource": {
+        "file": "http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/cultural/10m-admin-1-states-provinces-lines-shp.zip",
+        "id": "state-line",
+        "srs": "",
+        "project": "RoadMiles"
+      }
+    },
+    {
+      "geometry": "linestring",
+      "id": "country-border",
+      "name": "country-border",
+      "srs": "",
+      "class": "",
+      "Datasource": {
+        "file": "http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/cultural/10m-admin-0-boundary-lines-land.zip",
+        "id": "country-border",
+        "srs": "",
+        "project": "RoadMiles"
+      }
+    },
+    {
+      "geometry": "linestring",
+      "id": "coastline",
+      "name": "coastline",
+      "srs": "",
+      "class": "",
+      "Datasource": {
+        "file": "http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/physical/10m-coastline.zip",
+        "id": "coastline",
+        "srs": "",
+        "project": "RoadMiles"
+      }
+    },
+    {
+      "geometry": "point",
+      "id": "city",
+      "name": "city",
+      "srs": "",
+      "class": "",
+      "Datasource": {
+        "file": "http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/cultural/10m-populated-places-simple.zip",
+        "id": "city",
+        "srs": null,
+        "project": "RoadMiles"
+      }
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -155.905271,
+        17.928261,
+        -65.455127,
+        64.567297
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid, geom, block_fips, carrier,   \nto_char(round((no_high_cost_locations) + (no_med_cost_locations)), '999,999,999,999') as tot_locations,\nto_char(round(no_high_cost_locations), '999,999,999') as num_hi_loc, to_char(round(no_med_cost_locations), '999,999,999') as num_low_loc, to_char(round((no_high_cost_locations*775) + (no_med_cost_locations*550)), '999,999,999,999') as tot_support \n from analysis.caf1_round2_block_poly) as round2_blocks",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-155.905271,17.928261,-65.455127,64.567297",
+        "host": "localhost",
+        "port": "54321",
+        "dbname": "feomike",
+        "id": "round2_blocks",
+        "project": "caf1_round2",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "round2_blocks",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "round2_blocks"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        -156.35303236685562,
+        20.268831817091524,
+        -69.23046123415384,
+        65.03481843167305
+      ],
+      "id": "statecentroids",
+      "class": "",
+      "Datasource": {
+        "file": "https://raw.github.com/where-gov/fcc/master/basemap/state_centroids.geojson",
+        "id": "statecentroids",
+        "project": "caf1_round2",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "statecentroids"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -179.14723599999994,
+        -14.548698999999917,
+        179.77846999999988,
+        71.39038000000002
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select * from carto.county) as county_lines",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-19942579.0885424,-1637243.58853687,20012847.7359938,11537091.7298767",
+        "host": "localhost",
+        "port": "54321",
+        "dbname": "feomike"
+      },
+      "id": "county_lines",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "county_lines"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        -155.51839529089537,
+        17.994997475959448,
+        -65.44166879320917,
+        65.66473928455353
+      ],
+      "id": "round2_cty_pt",
+      "class": "",
+      "Datasource": {
+        "file": "https://raw.github.com/feomike/caf1_round2/master/data/caf_round2_cty_pt.geojson"
+      },
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "round2_cty_pt"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -176.764008473144,
+        14.590750676565,
+        -52.64725244187381,
+        70.2966838677457
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid, geom, type, country from carto.ne_roads where country = 'United States' and (type = 'Freeway' or type = 'Tollway')) as ne_freeway",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-176.764008473144,14.590750676565,-52.6472524418738,70.2966838677457",
+        "host": "localhost",
+        "port": "54321",
+        "dbname": "feomike",
+        "id": "ne_roads",
+        "project": "caf1_round2",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "ne_freeway",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "ne_freeway"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -176.764008473144,
+        14.590750676565,
+        -52.64725244187381,
+        70.2966838677457
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid, geom, type, country from carto.ne_roads where country = 'United States' and type = 'Primary') as ne_primary",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-176.764008473144,14.590750676565,-52.6472524418738,70.2966838677457",
+        "host": "localhost",
+        "port": "54321",
+        "dbname": "feomike"
+      },
+      "id": "ne_primary",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "ne_primary"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -176.764008473144,
+        14.590750676565,
+        -52.64725244187381,
+        70.2966838677457
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid, geom, type, country from carto.ne_roads where country = 'United States' and (type = 'Secondary' or type = 'Other Paved')) as ne_freeway",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-176.764008473144,14.590750676565,-52.6472524418738,70.2966838677457",
+        "host": "localhost",
+        "port": "54321",
+        "dbname": "feomike"
+      },
+      "id": "other",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "other"
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "name": "Connect America Fund (CAF) Phase I Round Two",
+  "description": "This map shows the areas where new broadband may be deployed as a result of the second round of Connect America Phase I.  In their initial elections, price cap carriers requested over $385 million in Connect America Phase I incremental support, committing to bring broadband to over 600,000 locations that previously lacked access by 2016.  Some of these carrier acceptances are contingent upon the carriers prevailing in challenges regarding whether certain census blocks are unserved.  Furthermore, after providing the Commission with notice, carriers have the ability to alter deployment plans to other unserved census blocks, which could result in more or less funding being allocated to any given area.  Additionally, as not all carriers provided a count of locations they planned to deploy to in each census block, some of these figures are estimates.\n\nSome of the census blocks are contingent upon carriers prevailing in challenges regarding whether certain census blocks are unserved.  Furthermore, after providing the Commission with notice, carriers have the ability to alter deployment plans to other unserved census blocks.\n\nNumber of locations per census block estimated by FCC staff for AT&T, Frontier, and Hawaiian Telecom.",
+  "attribution": "FCC",
+  "legend": "<table class=\"tbl-data\">\n<tr><td colspan=\"3\" class=\"center\"><strong>CAF Round 2</strong></td></tr>\n<tr><td colspan=\"3\" class=\"center\"><strong>Areas to be Potentially Covered</strong></td></tr>\n<tr><td colspan=\"3\" class=\"center\">\n<img align=\"left\" src='data:image/png;base64,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' />\n</td></tr>\n</table>\n\n<style type=\"text/css\">\n.ts-map .wax-legend {\n background-color: #CFCFCF;\n max-width:400px !important;\n max-height:300px !important;\n overflow:visible !important;\n width:auto9 !important;\n}\n.tbl-data th.center, td.center {\ntext-align: center;\n}\n.tbl-data td, .tbl-data th {\nborder: none;\n}\n</style>\n",
+  "version": "1.0.1"
+}
